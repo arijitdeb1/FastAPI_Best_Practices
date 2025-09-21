@@ -1,0 +1,13 @@
+fastapi
+uvicorn
+sse_starlette
+sqlalchemy
+gradio
+redis
+python-jose[cryptography]
+passlib[bcrypt]
+python-multipart
+slowapi
+fastapi_cache
+fastapi-cache2
+gunicorn
