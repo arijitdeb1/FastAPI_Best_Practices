@@ -240,3 +240,45 @@ Save this as /etc/supervisor/conf.d/fastapi.conf, then update and start the serv
       - Configure API Gateway to route requests to your Lambda function.
       - Deploy using AWS CLI or CloudFormation.
       - Creating deployment scripts can automate and standardize the deployment process. Refer `deployment_script.sh`
+
+# Other Facts:
+
+⚡**Why Uvicorn alone is not ideal for production**
+
+While Uvicorn is fast and lightweight, it has a few limitations when used by itself in production:
+
+1. 🧍 Single-process, single-worker by default
+
+    Can’t fully utilize multi-core CPUs.
+
+    If your single worker crashes or hangs, your app is unavailable.
+
+2. 🛡️ No built-in process management
+
+   Uvicorn doesn’t restart crashed workers automatically.
+
+   No supervision or load balancing across workers.
+
+3. 📊 Limited advanced configuration
+
+   Lacks features like graceful restarts, preloading, request limits, etc.
+
+
+🚀 **Why Gunicorn (with Uvicorn workers) is better for production**
+
+Gunicorn is a battle-tested process manager, and it can manage multiple Uvicorn worker processes — giving you the best of both worlds:
+
+✅ Gunicorn handles:
+
+Process management (restarts, scaling, monitoring)
+
+Load balancing across workers
+
+Multi-core CPU utilization
+
+✅ Uvicorn workers handle:
+
+High-performance async request handling (ASGI apps)
+
+WebSocket and async I/O support
+   
